@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>网页聊天室</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+		textarea {
+			width: 100%;
+			height: 100px;
+			margin-bottom: 10px;
+		}
+		button {
+			padding: 5px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+		.chat-box {
+			background-color: #f2f2f2;
+			padding: 10px;
+			overflow-y: scroll;
+			height: 300px;
+			margin-top: 10px;
+		}
+		.message {
+			margin-bottom: 5px;
+		}
+		.timestamp {
+			font-size: 12px;
+			color: #777;
+			margin-left: 5px;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<label for="username">用户名：</label>
+		<input type="text" id="username" name="username" required>
+		<label for="message">消息：</label>
+		<textarea id="message" name="message" required></textarea>
+		<button type="button" onclick="sendMessage()">发送</button>
+	</form>
+
+	<div class="chat-box" id="chat-box">
+	</div>
+
+	<script>
+		function sendMessage() {
+			var username = document.getElementById('username').value;
+			var message = document.getElementById('message').value;
+			var now = new Date();
+			var timestamp = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+			var chatBox = document.getElementById('chat-box');
+			var newMessage = document.createElement('div');
+			newMessage.innerHTML = '<strong>' + username + '</strong>: ' + message + '<span class="timestamp">' + timestamp + '</span>';
+			newMessage.className = 'message';
+			chatBox.appendChild(newMessage);
+			document.getElementById('message').value = '';
+			document.getElementById('message').focus();
+			chatBox.scrollTop = chatBox.scrollHeight;
+		}
+	</script>
+</body>
+</html>
